@@ -6,16 +6,19 @@ const app = express();
 
 app.use(cors());
 
-app.get('/test', function(req, res: any) {
+app.get('/test', async function(req, res) {
   console.log(req)
-  request({
+  const response = await request({
     uri: 'https://fcc-weather-api.glitch.me/api/current',
     qs: {
       lat: req.query.lat,
       lon: req.query.lon
     }
-
-  }).pipe(res);
+  })
+  console.log(response)
+  res.send(response)
 });
 
 app.listen(9000);
+
+
